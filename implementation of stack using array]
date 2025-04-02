@@ -1,24 +1,47 @@
-class MyStack {
-    private int[] arr;
-    private int top;
+public class Solution{
+    static class Stack {
+        private int arr[];
+        private int top;
 
-    public MyStack() {
-        arr = new int[1000];
-        top = -1;
-    }
+        Stack(int capacity) {
 
-    public void push(int x) {
-        top++;
-        arr[top] = x;
-        
-    }
-
-    public int pop() {
-        if(top == -1){
-            return -1;
+          arr = new int[capacity];
+          top = -1;
         }
-        int remove = arr[top];
-        top--;
-        return remove;
+        public void push(int num) {
+            if(top < arr.length-1){
+            top++;
+            arr[top] = num;
+            }
+            
+        }
+        public int pop() {
+            if(top == -1){
+                return -1;
+            }
+              int remove = arr[top];
+              top--;
+            
+           
+            return remove;
+        }
+        public int top() {
+            if(top == -1){
+                return -1;
+            }
+            return arr[top];
+        }
+        public int isEmpty() {
+            if(top == -1){
+                return 1;
+            }
+            return 0;
+        }
+        public int isFull() {
+            if(top == arr.length - 1){
+                return 1;
+            }
+            return 0;
+        }
     }
 }
