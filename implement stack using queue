@@ -32,3 +32,43 @@ class MyStack {
  * int param_3 = obj.top();
  * boolean param_4 = obj.empty();
  */
+
+
+-----------------------------By using 2 stack-------------------------
+import java.util.*;
+public class Solution{
+    static class Queue {
+     Stack<Integer> st1;
+     Stack<Integer> st2;
+        Queue() {
+            st1 = new Stack<>();
+            st2 = new Stack<>();
+        }
+
+        void enQueue(int val) {
+            st1.push(val);
+        }
+
+        int deQueue() {
+            if(st2.isEmpty()){
+                while(!st1.isEmpty()){
+                    st2.push(st1.pop());
+                }
+            }
+            return st2.isEmpty() ? -1 : st2.pop();
+        }
+
+        int peek() {
+            if(st2.isEmpty()){
+                while(!st1.isEmpty()){
+                    st2.push(st1.pop());
+                }
+            }
+            return st2.isEmpty() ? -1 : st2.peek();
+        }
+
+        boolean isEmpty() {
+            return st1.isEmpty() && st2.isEmpty();
+        }
+    }
+}
