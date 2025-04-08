@@ -1,0 +1,36 @@
+import java.util.*;
+public class Solution {
+    public static String removeKDigits(String num, int k) {
+
+        Stack<Character> st = new Stack<>();
+
+        for(char digit : num.toCharArray()){
+            while(!st.isEmpty() &&  k > 0 && st.peek() > digit){
+                st.pop();
+                k--;
+            }
+            st.push(digit);
+
+        }
+
+        while(k > 0 && !st.isEmpty()){
+            st.pop();
+            k--;
+        }
+        StringBuilder str = new StringBuilder();
+        for(char ch : st){
+            str.append(ch);
+        }
+
+        while(str.length() > 0 && str.charAt(0) == '0'){
+            str.deleteCharAt(0);
+        }
+
+        return str.length() == 0 ? "0" : str.toString();
+
+
+
+    }
+}
+Input: num = "1432219", k = 3  
+Output: "1219"
