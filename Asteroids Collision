@@ -1,0 +1,34 @@
+import java.util.*;
+public class Solution {
+    public static List< Integer > collidingAsteroids(int []asteroids) {
+
+        List<Integer> list  = new ArrayList<>();
+        Stack<Integer> st = new Stack<>();
+
+        for(int i = 0 ;i < asteroids.length;i++){
+            if(asteroids[i] > 0){
+                st.push(asteroids[i]);
+            }else{
+                while(!st.isEmpty() && st.peek() > 0 && st.peek() < Math.abs(asteroids[i])){
+                    st.pop();
+                }
+               if (!st.isEmpty() && st.peek() == Math.abs(asteroids[i])) {
+                    st.pop();
+                }else if(st.isEmpty() || st.peek() < 0){
+                    st.push(asteroids[i]);
+                }
+            }
+        } 
+
+            
+            list = new ArrayList<>(st);
+
+
+            return list;
+
+    }
+}
+
+
+Input: ‘asteroids’ = [3,-2,4]
+Output: [3, 4]
