@@ -1,0 +1,65 @@
+import java.util.*;
+
+public class Solution {
+  public static int largestRectangle(ArrayList < Integer > heights) {
+
+        int n = heights.size();
+        int prevSmall [] = new int[n];
+        int nextSmall [] = new int[n];
+        Stack<Integer> st = new Stack<>();
+
+
+        //prev smaller element
+        for(int i = 0;i < n; i++){
+                
+       while(!st.isEmpty() && heights.get(st.peek()) >= heights.get(i)){
+           st.pop();
+       }
+   
+       if(st.isEmpty()){
+           prevSmall[i] = 0;
+       }else{
+           prevSmall[i] = st.peek() + 1;
+       }
+       st.push(i);
+        }
+
+    while(!st.isEmpty()){
+        st.pop();
+    }
+
+        //next smaller element
+
+        for(int i = n-1;i >= 0; i--){
+                
+       while(!st.isEmpty() && heights.get(st.peek()) >= heights.get(i)){
+           st.pop();
+       }
+   
+       if(st.isEmpty()){
+           nextSmall[i] = n - 1;
+       }else{
+           nextSmall[i] = st.peek() - 1;
+       }
+       st.push(i);
+        }
+        
+        //calculate max area of rectangle histogram
+        int maxArea = 0;
+
+        for(int i = 0;i < n; i++){
+        maxArea = Math.max(maxArea, heights.get(i) * (nextSmall[i] - prevSmall[i] +1));
+        }
+
+       return maxArea; 
+
+    
+     }
+}
+
+[2, 1, 5, 6, 2, 3, 1]
+The maximum area is 10 
+
+T.c ===> prevSmall[], nextSmall[] → each of size n → O(n)
+
+S.C ===> Stack<Integer> → stores indices → at most n elements → O(n)
