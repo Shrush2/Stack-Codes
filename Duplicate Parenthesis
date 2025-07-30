@@ -1,0 +1,42 @@
+import java.util.* ;
+import java.io.*; 
+
+public class Solution {
+
+	public static boolean duplicateParanthesis(String expr) {
+
+		Stack<Character> stack = new Stack<>();
+
+		for(char ch : expr.toCharArray()){
+
+			if(ch == ')' && stack.peek() == '('){
+				return true;
+			}
+			else if(ch == ')'){
+				while(stack.peek() != '(' && stack.size() > 0){
+					stack.pop();
+				}
+				stack.pop();
+			}
+			else{
+				stack.push(ch);
+			}
+		
+		}
+		return false;
+	}
+
+}
+
+you are given the expression ‘expr’ with parenthesis. Your task is to find if the given expression contains duplicate parenthesis. A set of parenthesis is duplicate if multiple parenthesis
+surrounds the same subexpression.
+For Example:
+You are given ‘expr’ = “(a+b)+((c+d))”, here the subexpression “c+d” is surrounded by two parentheses. Hence the expression contains duplicate parenthesis. Hence the answer is “YES”.
+
+Sample Input 1:
+(a+b)+((c+d))
+((a+b) + c)
+Sample Output 1:
+YES
+NO
+
