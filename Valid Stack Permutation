@@ -1,0 +1,98 @@
+import java.util.*;
+
+public class Solution {
+    public static boolean validStackPermutation(ArrayList<Integer> first, ArrayList<Integer> other){
+        // Write your code here.
+
+        Stack<Integer> stack = new Stack<>();
+        int n = first.size();
+
+        int j = 0;
+        for(int i = 0; i < n; i++){
+            stack.push(first.get(i));
+
+            while(!stack.isEmpty() && (stack.peek().equals(other.get(j)))){
+                stack.pop();
+                j++;
+            }
+        }
+
+        if(stack.isEmpty() && j == n){
+            return true;
+        }
+        return false;
+    }
+}
+
+You have been given two arrays having an equal number of elements. You have to find whether one array is the valid stack permutation of the other. An array is said to be a valid stack 
+permutation of the other if and only if after applying some push and pop operations onto the sequence of elements in that array, will result in the other array.
+
+Example:
+first = [2, 4, 6]
+other = [4, 6, 2]
+
+Step 1: i = 0
+
+Push first[0] = 2
+➡️ stack = [2]
+Now check while condition:
+stack.peek() == other[j] ?
+2 == 4 ? ❌
+
+
+No → stop the while loop.
+✅ Current state:
+stack = [2], j = 0
+
+
+🔹 Step 2: i = 1
+Push first[1] = 4
+➡️ stack = [2, 4]
+Now check while condition:
+stack.peek() == other[j] ?
+4 == 4 ? ✅
+→ Pop from stack → stack = [2]
+→ j++ → j = 1
+
+Check again:
+
+stack.peek() == other[j] ?
+2 == 6 ? ❌
+Stop.
+
+✅ Current state:
+stack = [2], j = 1
+
+
+🔹 Step 3: i = 2
+Push first[2] = 6
+➡️ stack = [2, 6]
+Check while condition:
+stack.peek() == other[j] ?
+6 == 6 ? ✅
+→ Pop → stack = [2]
+→ j++ → j = 2
+
+Now check again:
+stack.peek() == other[j] ?
+2 == 2 ? ✅
+→ Pop → stack = []
+→ j++ → j = 3
+
+✅ Current state:
+stack = [], j = 3
+
+✅ Final Check
+
+After the loop:
+
+stack.isEmpty() && j == n ?
+true && 3 == 3 ? ✅
+
+
+✅ Result: YES (true)
+So [4, 6, 2] is a valid stack permutation of [2, 4, 6].
+
+
+T.C => O(N)
+S.C => O(N)
